@@ -7,6 +7,10 @@ mixin skill-data()
 		.description
 			| Отметьте чекбоксами пункты, которые соответствуют вашим скиллам. Кстати, отсутствие опыта не означает, что у вас меньше шансов стать одним из наших товарищей. Это означает, что вы будете получать те задачи, с которыми гарантированно будете справляться.
 		+e.form
-			+skill(getData('skill-base1'))
-			+skill(getData('skill-base2'))
-			+skill(getData('skill-base3'))
+			.row
+				.col-3
+					+skill(getData('skill-base1'))
+				.spacer
+					+skill(getData('skill-base2'))
+				.col-3
+					+skill(getData('skill-base3'))

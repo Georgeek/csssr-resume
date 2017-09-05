@@ -8,7 +8,7 @@ body
 	{$body_font}
 
 section
-	margin-top: 42px
+	margin-top: 22px
 
 .row
 	display: flex
@@ -25,14 +25,12 @@ section
 .subtitle
 	font-size: 24px
 	font-weight: bold
+	margin-bottom: 10px
 	{$margin_title}
 
 .title
 	position relative
-	top 15px
-	margin-right 10px
-	padding 20px 20px 20px 0
-	background-image url(../images/background-container.png)
+	padding 32px 15px 0 0
 	{$body_font}
 	{$font_title}
 
@@ -40,16 +38,14 @@ section
 	{$font_p}
 
 .courier
-	line-height 60px
+	line-height 57px
 	background url(../../assets/images/js-bar.png)
-	background-position -6px 26px
+	background-position -6px 24px
 	{$p_courier}
+	flex 1
+	padding-left: 15px
 
 .container
 	padding: 70px 117px 73px 113px
 	width 1000px
 	background-image url(../images/background-container.png)
-
-	+mobile()
-		padding-top 40px
-		padding-bottom 20px
