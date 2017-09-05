@@ -1,5 +1,6 @@
 mixin datas(data)
 	each item in data
 		+e.wrap
-			span.title= item[0]
-			p.courier= item[1]
+			p.courier
+				span.title= item[0]
+				= item[1]
