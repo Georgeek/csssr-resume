@@ -1,0 +1,9 @@
+[
+	["gulp", "Gulp/GRUNT", true],
+	["webpack", "Webpack"],
+	["webgl", "Дружу с WebGL"],
+	["jq", "jQuery", true],
+	["angular", "Знаю/изучаю Angular"],
+	["react", "Знаю/изучаю React"],
+	["nodejs", "Знаю/изучаю Node.js", true]
+]

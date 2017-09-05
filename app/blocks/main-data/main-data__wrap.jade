@@ -1,0 +1,6 @@
+mixin datas(data)
+	each item in data
+		+e.wrap
+			p.courier
+				span.title= item[0]
+				= item[1]
