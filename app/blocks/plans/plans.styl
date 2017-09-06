@@ -1,15 +1,17 @@
 .plans
+	margin-top 42px
 	&__form
-		margin 20px 0 0 30px
+		margin 17px 0 0 30px
 	&__input
 		display none
-	&__input[type='radio']:checked + .plans__label:before
+	&__input[type='radio']checked + .plans__label:before
 		size(27px, 29px)
 		background-position -57px -7px
 	&__label
 		position relative
-		margin-right 40px
-		{$font_title}
+		margin-right 50px
+		font-size 20px
+		font-weight bold
 	&__label:before
 		position absolute
 		top -2px
