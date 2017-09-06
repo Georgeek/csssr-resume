@@ -1,6 +1,32 @@
 .skill-data
+	margin-top: 60px
 	&__form
-		margin-top 35px
-		margin-left 25px
-		display inline-block
-		width 100%
+		margin-top 28px
+	&__block
+		margin-left: 27px
+		&__wrap
+			margin-bottom 10px
+		&__label
+			position relative
+			font-size 21px
+			font-weight 800
+			line-height: 25px
+		&__label:before
+			position absolute
+			left -27px
+			top: 4px
+			size(19px, 20px)
+			content ''
+			background url(../images/sprites/icons.png)
+			background-position -31px -51px
+		&__input
+			display none
+			&-span1
+				position relative
+				top 3px
+			&-span2
+				position relative
+				top 6px
+		&__input[type='checkbox']:checked + .skill-data__block__label:before
+			size(19px, 20px)
+			background-position -2px -51px

@@ -12,15 +12,15 @@ section
 
 .row
 	display: flex
-	justify-content: space-between
 
-.col-3
-	width: calc(33.33333% - 8px)
-	// background-color: pink
-
-.spacer
-	flex: 1
+.col-1
+	min-width: 258px
+.col-2
+	min-width: 269px
 	// background-color: #91fff5
+.col-3
+	min-width: 242px
+	// background-color: pink
 
 .subtitle
 	font-size: 24px
@@ -33,6 +33,7 @@ section
 	{$font_title}
 
 .description
+	margin-top: 10px
 	{$font_p}
 
 .courier
@@ -44,6 +45,6 @@ section
 	{$p_courier}
 
 .container
-	padding: 70px 117px 73px 113px
+	padding: 70px 116px 73px 113px
 	width 1000px
 	background-image url(../images/background-container.png)
