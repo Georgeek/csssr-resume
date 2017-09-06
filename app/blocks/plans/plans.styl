@@ -4,9 +4,6 @@
 		margin 17px 0 0 30px
 	&__input
 		display none
-	&__input[type='radio']checked + .plans__label:before
-		size(27px, 29px)
-		background-position -57px -7px
 	&__label
 		position relative
 		margin-right 50px
@@ -20,3 +17,6 @@
 		content ''
 		background url(../images/sprites/icons.png)
 		background-position -8px -7px
+	&__input[type='radio']:checked + .plans__label:before
+		size(27px, 29px)
+		background-position -57px -7px
