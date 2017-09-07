@@ -4,7 +4,6 @@ const thumbElem = sliderElem.children[0];
 function getCoords(elem) {
 	const box = elem.getBoundingClientRect();
 	return {
-		top: box.top + pageYOffset,
 		left: box.left + pageXOffset
 	};
 }
@@ -24,7 +23,6 @@ thumbElem.onmousedown = function (e) {
 		if (newLeft > rightEdge) {
 			newLeft = rightEdge;
 		}
-
 		thumbElem.style.left = newLeft + 'px';
 	};
 
@@ -39,5 +37,3 @@ thumbElem.ondragstart = () => {
 	console.log('click DRAG');
 	return false;
 };
-
-
