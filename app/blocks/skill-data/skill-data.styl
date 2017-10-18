@@ -1,3 +1,8 @@
+.skill-list
+	column-count 3
+	li
+		margin-bottom 10px // same as &__wrap
+
 .skill-data
 	margin-top 64px
 	&__form
@@ -8,6 +13,7 @@
 			margin-bottom 10px
 		&__label
 			position relative
+			left 28px
 			font-size 21px
 			font-weight 800
 			line-height 25px
@@ -32,4 +38,4 @@
 				top 3px
 		&__input[type='checkbox']:checked + .skill-data__block__label:before
 			size(24px, 30px)
-			background-position 0 -52px
+			background-position 0 -51px

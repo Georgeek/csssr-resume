@@ -1,10 +1,10 @@
-mixin plan(plans)
+mixin plan(data)
 	.plans__form
-		each item in plans
-			input(class='plans__input' 
-					id='#{item[0]}' 
+		each item in data.career
+			input(class='plans__input'
+					id='#{item[0]}'
 					type='radio'
-					name='plans' 
+					name='plans'
 					checked != item[2])
-			label(class='plans__label' 
+			label(class='plans__label'
 					for='#{item[0]}')!= item[1]

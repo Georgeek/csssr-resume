@@ -1,9 +1,0 @@
-[
-	["bem", "БЭМ/OOCSS", true],
-	["jade", "Pug (Jade)", true],
-	["sass", "Stylus/LESS/SASS", true],
-	["svg", "Работаю с SVG"],
-	["style", "Верстаю семантично"],
-	["ally", "Accessibility (A11Y)"],
-	["js", "ES2015/ES2016"]
-]

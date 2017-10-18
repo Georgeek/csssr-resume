@@ -1,39 +1,43 @@
-const sliderElem = document.getElementById('slider');
-const thumbElem = sliderElem.children[0];
+(function () {
+	const sliderElem = document.getElementById('slider');
+	const thumbElem = sliderElem.children[0];
 
-function getCoords(elem) {
-	const box = elem.getBoundingClientRect();
-	return {
-		left: box.left + pageXOffset
+	function getCoords(elem) {
+		const box = elem.getBoundingClientRect();
+		return {
+			left: box.left + pageXOffset
+		};
+	}
+
+	thumbElem.onmousedown = function (e) {
+		const thumbCoords = getCoords(thumbElem);
+		const	shiftX = e.pageX - thumbCoords.left;
+		const	sliderCoords = getCoords(sliderElem);
+
+		document.onmousemove = function (el) {
+		// вычесть координату родителя, т.к. position: relative
+
+			let newLeft = el.pageX - shiftX - sliderCoords.left;
+			const rightEdge = sliderElem.offsetWidth - thumbElem.offsetWidth;
+			if (newLeft < 0) {
+				newLeft = -7;
+			}
+
+			if (newLeft > rightEdge) {
+				newLeft = rightEdge + 5;
+			}
+			thumbElem.style.left = newLeft + 'px';
+		};
+
+		document.onmouseup = () => {
+			document.onmousemove = document.onmouseup = null;
+		};
+
+		return false;
 	};
-}
 
-thumbElem.onmousedown = function (e) {
-	const thumbCoords = getCoords(thumbElem);
-	const	shiftX = e.pageX - thumbCoords.left;
-	const	sliderCoords = getCoords(sliderElem);
-
-	document.onmousemove = function (el) {
-		let newLeft = el.pageX - shiftX - sliderCoords.left;
-		const rightEdge = sliderElem.offsetWidth - thumbElem.offsetWidth;
-		if (newLeft < 0) {
-			newLeft = 0;
-		}
-
-		if (newLeft > rightEdge) {
-			newLeft = rightEdge;
-		}
-		thumbElem.style.left = newLeft + 'px';
+	thumbElem.ondragstart = () => {
+		console.log('click DRAG');
+		return false;
 	};
-
-	document.onmouseup = () => {
-		document.onmousemove = document.onmouseup = null;
-	};
-
-	return false;
-};
-
-thumbElem.ondragstart = () => {
-	console.log('click DRAG');
-	return false;
-};
+}());

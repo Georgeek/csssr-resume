@@ -1,10 +1,10 @@
-mixin skill(skilldata)
+mixin skill(data)
 	+e.block
-		each item in skilldata
+		each item in data.skills
 			+e.block__wrap
-				input(class='skill-data__block__input' 
+				input(class='skill-data__block__input'
 						id='#{item[0]}'
-						type='checkbox' 
+						type='checkbox'
 						checked != item[2])
 				label(class='skill-data__block__label'
 						for='#{item[0]}')!= item[1]

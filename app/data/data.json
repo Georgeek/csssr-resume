@@ -1,7 +1,38 @@
-[
-	["Полное ФИО", "Мадьяров Георгий Тимурович"],
-	["Год рождения", "1988"],
-	["Место жительства", "г. Иркутск, Россия"],
-	["Скайп", "egor.madiarov"],
-	["Почта", "egormad@gmail.com"]
-]
+{
+	"person": [
+		["Полное ФИО", "Мадьяров Георгий Тимурович"],
+		["Год рождения", "1988"],
+		["Место жительства", "г. Иркутск, Россия"],
+		["Скайп", "egor.madiarov"],
+		["Почта", "egormad@gmail.com"]
+	],
+	"career": [
+		["verstka", "Верстать", true],
+		["skillJs", "Прокачиваться в JS"],
+		["PMI", "Менеджерство"],
+		["other", "Другое"]
+	],
+	"skills": [
+		["bem", "БЭМ/OOCSS"],
+		["jade", "Pug (Jade)"],
+		["sass", "Stylus/LESS/SASS"],
+		["svg", "Работаю с SVG"],
+		["style", "Верстаю семантично"],
+		["ally", "Accessibility (A11Y)"],
+		["js", "ES2015/ES2016"],
+
+		["gulp", "Gulp/GRUNT"],
+		["webpack", "Webpack"],
+		["webgl", "Дружу с WebGL"],
+		["jq", "jQuery"],
+		["angular", "Знаю/изучаю Angular"],
+		["react", "Знаю/изучаю React"],
+		["nodejs", "Знаю/изучаю Node.js"],
+
+		["git", "Использую Git"],
+		["norm", "С <span class='skill-data__block__input-span0'>глазомером</span> <span class='skill-data__block__input-span1'>все</span> <span class='skill-data__block__input-span2'>ок</span>"],
+		["blogger", "Читаю <a href='http://blog.csssr.ru'>blog.csssr.ru</a>"],
+		["lazy", "Я ленивый(-ая)"],
+		["notbad", "У меня хороший английский"]
+	]
+}
