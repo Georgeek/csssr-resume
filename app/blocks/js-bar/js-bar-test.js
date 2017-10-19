@@ -1,106 +1,118 @@
 import $ from 'jquery';
 
-//Sample dates
-const dates = ["2/3/2015", "6/12/2015", "8/15/2015", "10/22/2015", "11/2/2015", "12/22/2015"];
-//For the purpose of stringifying MM/DD/YYYY date format
-const monthSpan = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+// Пример данных: [название, проценты]
+const data = [
+	['Не владею'],
+	['Использую готовые решения', 19],
+	['Использую готовые решения и умею их переделывать', 48],
+	['Пишу сложный JS с нуля']
+];
 
-//Format MM/DD/YYYY into string
-function dateSpan(date) {
-	var month = date.split('/')[0];
-	month = monthSpan[month - 1];
-	var day = date.split('/')[1];
-	if (day.charAt(0) == '0') {
-		day = day.charAt(1);
-	}
-	var year = date.split('/')[2];
+const sliderElem = document.getElementById('line');
+const thumbElem = sliderElem.children[0];
 
-	//Spit it out!
-	return month + " " + day + ", " + year;
-}
-
-//Main function. Draw your circles.
+// Основная функция. Здесь рисуется скроллбар
 function makeCircles() {
-	//Forget the timeline if there's only one date. Who needs it!?
-	if (dates.length < 2) {
-		$("#line").hide();
-		$("#span").show().text(dateSpan(dates[0]));
-		//This is what you really want.
-	} else if (dates.length >= 2) {
-		//Set day, month and year variables for the math
-		var first = dates[0];
-		var last = dates[dates.length - 1];
+	// Не рисуем скролбар, если в массиве всего 1 цифра. Иначе зачем нам рисовать?
+	if (data.length < 2) {
+		$('#line').hide();
+		$('#span').show().text(data[0][0]);
+		// Рисуем, если в массиве 2 или более цифры
+	}else if (data.length >= 2) {
+		let i;
+		// Объявляем первый и последний элемент массива
+		const first = data[0][0];
+		const last = data[data.length - 1][0];
 
-		var firstMonth = parseInt(first.split('/')[0]);
-		var firstDay = parseInt(first.split('/')[1]);
+		// Рисуем начальную точку скролбара
+		$('#line').append(`
+			<div class='circle' id='circle0' style='left: 0%;'>
+				<div class="js-bar__text"> ${first} </div>
+			</div>
+		`);
 
-		var lastMonth = parseInt(last.split('/')[0]);
-		var lastDay = parseInt(last.split('/')[1]);
-
-		//Integer representation of the last day. The first day is represnted as 0
-		var lastInt = ((lastMonth - firstMonth) * 30) + (lastDay - firstDay);
-
-		//Draw first date circle
-		$("#line").append('<div class="circle" id="circle0" style="left: ' + 0 + '%;"><div class="popupSpan">' + dateSpan(dates[0]) + '</div></div>');
-
-		$("#mainCont").append('<span id="span0" class="center">' + dateSpan(dates[0]) + '</span>');
-
-		//Loop through middle dates
-		for (i = 1; i < dates.length - 1; i++) {
-			var thisMonth = parseInt(dates[i].split('/')[0]);
-			var thisDay = parseInt(dates[i].split('/')[1]);
-
-			//Integer representation of the date
-			var thisInt = ((thisMonth - firstMonth) * 30) + (thisDay - firstDay);
-
-			//Integer relative to the first and last dates
-			var relativeInt = thisInt / lastInt;
-
-			//Draw the date circle
-			$("#line").append('<div class="circle" id="circle' + i + '" style="left: ' + relativeInt * 100 + '%;"><div class="popupSpan">' + dateSpan(dates[i]) + '</div></div>');
-
-			$("#mainCont").append('<span id="span' + i + '" class="right">' + dateSpan(dates[i]) + '</span>');
+		// Циклом проходим через промежуточные данные
+		for (i = 1; i < data.length - 1; i++) {
+			// Рисуем промежуточные данные, где data[i][1] - это проценты на которые элемент сместится в скроллбаре
+			$('#line').append(`
+				<div class='circle' id='circle${i}' style='left: ${data[i][1]}%;'>
+					<div class="js-bar__text"> ${data[i][0]} </div>
+				</div>
+			`);
 		}
 
-		//Draw the last date circle
-		$("#line").append('<div class="circle" id="circle' + i + '" style="left: ' + 99 + '%;"><div class="popupSpan">' + dateSpan(dates[dates.length - 1]) + '</div></div>');
-
-		$("#mainCont").append('<span id="span' + i + '" class="right">' + dateSpan(dates[i]) + '</span>');
+		// Рисуем конец скролбара
+		$('#line').append(`
+			<div class='circle' id='circle${i}' style='left: 99%;'>
+				<div class="js-bar__text"> ${last} </div>
+			</div>
+		`);
 	}
 
-	$(".circle:first").addClass("active");
+	$('.circle:nth-child(4)').addClass('active');
+}
+
+function selectDate(selector) {
+	const $selector = '#' + selector;
+
+	$('.active').removeClass('active');
+	$($selector).addClass('active');
 }
 
 makeCircles();
 
-$(".circle").mouseenter(function() {
-	$(this).addClass("hover");
+$('.circle').mouseenter(function () {
+	$(this).addClass('hover');
 });
 
-$(".circle").mouseleave(function() {
-	$(this).removeClass("hover");
+$('.circle').mouseleave(function () {
+	$(this).removeClass('hover');
 });
 
-$(".circle").click(function() {
-	var spanNum = $(this).attr("id");
+$('.circle').click(function () {
+	const spanNum = $(this).attr('id');
 	selectDate(spanNum);
+	console.dir(thumbElem.onmousedown);
+	thumbElem.onmousedown;
 });
 
-function selectDate(selector) {
-	let $selector = "#" + selector;
-	let $spanSelector = $selector.replace("circle", "span");
-	var current = $selector.replace("circle", "");
-
-	$(".active").removeClass("active");
-	$($selector).addClass("active");
-
-	if ($($spanSelector).hasClass("right")) {
-		$(".center").removeClass("center").addClass("left")
-		$($spanSelector).addClass("center");
-		$($spanSelector).removeClass("right")
-	} else if ($($spanSelector).hasClass("left")) {
-		$('.center').removeClass('center').addClass('right');
-		$($spanSelector).addClass('center');
-		$($spanSelector).removeClass('left');
-	}
+function getCoords(elem) {
+	const box = elem.getBoundingClientRect();
+	return {
+		left: box.left + pageXOffset
+	};
 }
+
+thumbElem.onmousedown = function (e) {
+	const thumbCoords = getCoords(thumbElem);
+	const	shiftX = e.pageX - thumbCoords.left;
+	const	sliderCoords = getCoords(sliderElem);
+
+	document.onmousemove = function (el) {
+	// вычесть координату бегунка (newLeft),
+		let newLeft = el.pageX - shiftX - sliderCoords.left;
+		const rightEdge = sliderElem.offsetWidth - thumbElem.offsetWidth;
+
+		// опрееляем крайнюю точку слева и справа
+		if (newLeft < 0) {
+			newLeft = -7;
+		}
+		if (newLeft > rightEdge) {
+			newLeft = rightEdge + 5;
+		}
+		// Смещаем бегунок на новую координату
+		thumbElem.style.left = newLeft + 'px';
+	};
+
+	// отпускаем кнопку мыши - останавливаем функцию mousemove
+	document.onmouseup = () => {
+		document.onmousemove = document.onmouseup = null;
+	};
+
+	return false;
+};
+
+// отключаем возможность браузера своим методом перетаскивать элемент. Я буду использовать стандартный = mousemove
+thumbElem.ondragstart = () => {
+	return false;
+};

@@ -1,5 +1,4 @@
-import $ from 'jquery';
-// import '../../node_modules/jquery-ui/jquery-ui.js';
+// Прежде чем включать этот скрипт, нужно в js-bar jade раскомментировать разметку
+// import '../blocks/js-bar/js-bar.js';
 
-import '../blocks/js-bar/js-bar.js';
 import '../blocks/js-bar/js-bar-test.js';
