@@ -1,33 +1,36 @@
 import $ from 'jquery';
 
-// Пример данных: [название, проценты]
-const datas = [
-	['Не владею'],
-	['Использую готовые решения', 19],
-	['Использую готовые решения и умею их переделывать', 48],
-	['Пишу сложный JS с нуля']
-];
+// TO DO
+// [ ] Обозначить options как объект конструктор?
+// [ ] Переделать Slider в класс с методами?
+// [ ] При создании вех должны создаваться и отметки для более четкого расположения
+// [ ] При клике на имя бегунок должен автоматически смещаться на заданное значение
+
+import { jslevel } from '../../data/data.json';
+const datas = jslevel;
 
 function Slider(options) {
-	const elemId = '#'+ options.elemId || lineCont;
-	const max = options.max || 100;
+	const elemId = '#' + options.elemId;
 	const data = options.data || null;
 
-	let shiftX;
-
-	const elem = $(elemId);
-	const $thumbElem = $('#thumb');
+	// объявляем
+	// слайдер, бегунок, выравнивание бегунка по левому и правому краю
+	let $line, $thumbElem, thumbOffsetLeft, thumbOffsetRight;
 
 	// Создаем в контейнере линию и бегунок для слайдера
-	elem.append(`<div id="line">
-								<span id="thumb"></span>
-							</div>`);
+	const elem = $(elemId);
+	elem.append(`
+	<div id="line">
+		<span id="thumb"></span>
+	</div>`);
 
-	$('#thumb').css("left", 0 - ($('#thumb').outerWidth() / 4) + 'px');
+	$line = $('#line');
+	$thumbElem = $('#thumb');
+
 	// Здесь рисуются вехи скроллбара
-	// // Не рисуем скролбар, если в массиве всего 1 цифра. Иначе зачем нам рисовать?
+	// // Не рисуем скролбар, если длина массива меньше 2. Иначе зачем нам рисовать?
 	if (data.length < 2) {
-		$('#line').hide();
+		$line.hide();
 		$('.span').show().text(data[0][0]);
 
 		// Рисуем, если в массиве 2 или более цифры
@@ -38,8 +41,8 @@ function Slider(options) {
 		const last = data[data.length - 1][0];
 
 		// Рисуем начальную точку скролбара
-		$('#line').append(`
-			<div class='circle' id='circle0' style='left: 0%;'>
+		$line.append(`
+			<div class='circle' id='circle0' style='left: 0%; top: 32px'>
 				<div class="js-bar__text"> ${first} </div>
 			</div>
 		`);
@@ -47,22 +50,29 @@ function Slider(options) {
 		// Циклом проходим через промежуточные данные
 		for (i = 1; i < data.length - 1; i++) {
 			// Рисуем промежуточные данные, где data[i][1] - это проценты на которые элемент сместится в скроллбаре
-			$('#line').append(`
-				<div class='circle' id='circle${i}' style='left: ${data[i][1]}%;'>
+			$line.append(`
+				<div class='circle' id='circle${i}' style='left: ${data[i][1]}%; top: 30px'>
 					<div class="js-bar__text"> ${data[i][0]} </div>
 				</div>
 			`);
 		}
 
 		// Рисуем конец скролбара
-		$('#line').append(`
-			<div class='circle' id='circle${i}' style='left: 99%;'>
-				<div class="js-bar__text"> ${last} </div>
+		$line.append(`
+			<div class='circle' id='circle${i}' style='top: 37px'>
+				<div class="js-bar__text js-bar__text--last"> ${last} </div>
 			</div>
 		`);
 	}
 
-	$('.circle:nth-child(3)').addClass('active');
+	// отцентровываем бегунок по левому и правому краю
+	thumbOffsetLeft = $thumbElem.outerWidth() / 4;
+	thumbOffsetRight = $thumbElem.outerWidth() / 2;
+
+	// определяем начальное положение бегунка
+	$thumbElem.css('left', datas[1][1] - 0.4 + '%');
+	// или тут
+	$('#circle2').addClass('active');
 
 	function onMouseMove(e) {
 		dragThumb(e.clientX);
@@ -77,9 +87,11 @@ function Slider(options) {
 		document.removeEventListener('mouseup', onMouseUp);
 	}
 
-	$('#thumb').mousedown(function(el) {
+	$thumbElem.mousedown(function (el) {
 		startDrag(el.clientX);
-		return false; // может надо удалить это...
+
+		// не выделяет текст при нажатии мышкой
+		return false;
 	});
 
 	function startDrag(startClientX) {
@@ -88,23 +100,27 @@ function Slider(options) {
 	}
 
 	function dragThumb(clientX) {
-		let lineCoords = $('#line').position().left;
-		let leftCoord = clientX - lineCoords - ($('#thumb').innerWidth() / 2);
+		const lineCoords = $line.position().left;
+		let leftCoord = clientX - lineCoords - thumbOffsetRight;
 
-		let leftEdge = 0 - ($('#thumb').outerWidth() / 4);
+		// центруем бегунок по левому краю слайдера
+		const leftEdge = 0 - thumbOffsetLeft;
 		if (leftCoord < leftEdge) {
-			leftCoord = leftEdge
+			leftCoord = leftEdge;
 		}
-		let rigthEdge = $('#line').outerWidth() - ($('#thumb').outerWidth() / 2);
+
+		// центруем бегунок по правому краю слайдера
+		const rigthEdge = $line.outerWidth() - thumbOffsetRight;
 		if (leftCoord > rigthEdge) {
 			leftCoord = rigthEdge;
 		}
 
-		$('#thumb').css('left', leftCoord + 'px');
+		// изменяем положение бегунка
+		$thumbElem.css('left', leftCoord + 'px');
 	}
 }
 
-const slider = new Slider({
+new Slider({
 	elemId: 'lineCont',
 	data: datas
 });
