@@ -1,9 +1,8 @@
 import $ from 'jquery';
 
 // TO DO
-// [ ] Обозначить options как объект конструктор?
-// [ ] Переделать Slider в класс с методами?
-// [ ] При создании вех должны создаваться и отметки для более четкого расположения
+// [ ] custom function for jquery. Вид $('#lineCont').gSlider(data)
+// [ ] При создании вех должны создаваться и отметки для более четкого расположения. Взять вехи из Фотошопа
 // [ ] При клике на имя бегунок должен автоматически смещаться на заданное значение
 
 import { jslevel } from '../../data/data.json';
@@ -118,9 +117,11 @@ function Slider(options) {
 		// изменяем положение бегунка
 		$thumbElem.css('left', leftCoord + 'px');
 	}
+
+	return this;
 }
 
-new Slider({
+Slider({
 	elemId: 'lineCont',
 	data: datas
 });
