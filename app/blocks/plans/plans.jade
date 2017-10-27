@@ -1,9 +1,15 @@
-include ../plans/plans__form
-
 mixin plans()
 	+b.plans&attributes(attributes)
 		.subtitle
 				| Какие у вас планы на будущее?
 		.description
 				| Этот ответ ни на что не повлияет. Не беда, если в будущем ваши планы поменяются.
-		+plan(getData('data'))
+		.plans__form
+			each item in getData('data').career
+				input(class='plans__input'
+						id='#{item[0]}'
+						type='radio'
+						name='plans'
+						checked != item[2])
+				label(class='plans__label'
+						for='#{item[0]}')!= item[1]

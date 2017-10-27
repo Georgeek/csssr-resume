@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import './gslider.js'
+import './gslider.js';
 
 import {jslevel}from '../../data/data.json';
 

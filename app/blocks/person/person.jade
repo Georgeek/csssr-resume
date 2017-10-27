@@ -1,0 +1,6 @@
+mixin main-data()
+	+b.main-data&attributes(attributes)
+		each item in getData('data').person
+			+e.wrap
+				span.title= item[0]
+				p.courier= item[1]
