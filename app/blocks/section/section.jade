@@ -1,0 +1,8 @@
+mixin section(subtitle)
+	+b.SECTION&attributes(attributes)
+		if subtitle
+			.subtitle= subtitle
+		if block
+			block
+		else
+			p.courier Здесь, наверное, должен быть какой-то контент :)

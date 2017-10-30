@@ -1,50 +1,46 @@
-.skill-list
-	-webkit-column-count 3
-	-moz-column-count 3
-	column-count 3
-
-	li
-		margin-bottom 10px // same as &__wrap
-
-.skill-data
-	margin-top 64px
+.skills
+	margin-top 66px
 
 	&__form
-		margin-top 28px
+		margin-top 21px
+		-webkit-column-count 3
+		-moz-column-count 3
+		column-count 3
 
-	&__block
-		margin-left 27px
+	&__wrap
+		position relative
 
-		&__wrap
-			margin-bottom 10px
+	&__label
+		position relative
+		margin-y(5px)
+		padding-left 28px
+		display inline-block
+		width 100%
+		max-width 230px
+		font-size 21px
+		font-weight 800
+		line-height 25px
+		&:before
+			position absolute
+			top -8px
+			left 0
+			size(20px, 35px)
+			content ''
+			background url(../images/sprites/icons.png)
+			background-position 52px 40px
 
-		&__label
+	&__input
+		display none
+		&-span0
 			position relative
-			left 28px
-			font-size 21px
-			font-weight 800
-			line-height 25px
-			&:before
-				position absolute
-				top -5px
-				left -28px
-				size(20px, 35px)
-				content ''
-				background url(../images/sprites/icons.png)
-				background-position 52px 40px
+			top 1px
+		&-span1
+			position relative
+			top 2px
+		&-span2
+			position relative
+			top 3px
 
-		&__input
-			display none
-			&-span0
-				position relative
-				top 1px
-			&-span1
-				position relative
-				top 2px
-			&-span2
-				position relative
-				top 3px
-
-		&__input[type='checkbox']:checked + .skill-data__block__label:before
-			size(24px, 30px)
-			background-position 0 -51px
+	&__input[type='checkbox']:checked + &__label:before
+		size(24px, 35px)
+		background-position 0 -51px

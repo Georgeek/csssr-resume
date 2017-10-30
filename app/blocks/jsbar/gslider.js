@@ -64,7 +64,7 @@
 				// Рисуем промежуточные данные, где data[i][1] - это проценты на которые элемент сместится в скроллбаре
 				$line.append(`
 					<div class='gslider__split gslider__split--middle' style='left: ${data[i][1]}%; top: 30px'>
-						<div class="gslider__text"  style='left: 0.45%'> ${data[i][0]} </div>
+						<div class="gslider__text"> ${data[i][0]} </div>
 					</div>
 				`);
 			}

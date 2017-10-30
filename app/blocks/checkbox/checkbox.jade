@@ -1,0 +1,7 @@
+mixin checkbox(id, name, checked, type)
+	+e.wrap
+		+e.INPUT.input(id= id
+									type= type
+									checked!= checked
+									name= type === 'radio' ? 'plans' : false)
+		+e.LABEL.label(for= id)!= name

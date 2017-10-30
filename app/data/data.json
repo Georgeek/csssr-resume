@@ -7,37 +7,37 @@
 		["Почта", "egormad@gmail.com"]
 	],
 	"career": [
-		["verstka", "Верстать", true],
-		["skillJs", "Прокачиваться в JS"],
-		["PMI", "Менеджерство"],
+		["pagemaker", "Верстать", true],
+		["javascript", "Прокачиваться в JS"],
+		["management", "Менеджерство"],
 		["other", "Другое"]
 	],
 	"skills": [
 		["bem", "БЭМ/OOCSS"],
-		["jade", "Pug (Jade)"],
-		["sass", "Stylus/LESS/SASS"],
+		["jade", "Pug (Jade)", true],
+		["sass", "Stylus/LESS/SASS", true],
 		["svg", "Работаю с SVG"],
 		["style", "Верстаю семантично"],
 		["ally", "Accessibility (A11Y)"],
-		["js", "ES2015/ES2016"],
+		["js", "ES2015/ES2016", true],
 
 		["gulp", "Gulp/GRUNT"],
 		["webpack", "Webpack"],
 		["webgl", "Дружу с WebGL"],
-		["jq", "jQuery"],
+		["jq", "jQuery", true],
 		["angular", "Знаю/изучаю Angular"],
 		["react", "Знаю/изучаю React"],
 		["nodejs", "Знаю/изучаю Node.js"],
 
-		["git", "Использую Git"],
-		["norm", "С <span class='skill-data__block__input-span0'>глазомером</span> <span class='skill-data__block__input-span1'>все</span> <span class='skill-data__block__input-span2'>ок</span>"],
+		["git", "Использую Git", true],
+		["ocular", "С <span class='skill-data__block__input-span0'>глазомером</span> <span class='skill-data__block__input-span1'>все</span> <span class='skill-data__block__input-span2'>ок</span>"],
 		["blogger", "Читаю <a href='http://blog.csssr.ru'>blog.csssr.ru</a>"],
 		["lazy", "Я ленивый(-ая)"],
-		["notbad", "У меня хороший английский"]
+		["notbad", "У меня хороший английский", true]
 	],
 	"jslevel": [
 		["Не владею"],
-		["Использую готовые решения", 18.9],
+		["Использую готовые решения", 19],
 		["Использую готовые решения и умею их переделывать", 48.2],
 		["Пишу сложный JS с нуля"]
 	]

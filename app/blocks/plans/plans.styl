@@ -1,22 +1,32 @@
 .plans
-	margin-top 42px
+	margin-top 52px
+
+	&__wrap
+		position relative
+		margin-right 22px
+
 	&__form
-		margin 17px 0 0 30px
-	&__input
-		display none
+		margin-y(17px)
+		display flex
+
 	&__label
 		position relative
-		margin-right 50px
+		padding-left 33px
 		font-size 20px
 		font-weight bold
-	&__label:before
-		position absolute
-		top -2px
-		left -30px
-		size(27px, 29px)
-		content ''
-		background url(../images/sprites/icons.png)
-		background-position -8px -7px
-	&__input[type='radio']:checked + .plans__label:before
+
+		&:before
+			position absolute
+			top -2px
+			left 0
+			size(27px, 29px)
+			content ''
+			background url(../images/sprites/icons.png)
+			background-position -8px -7px
+
+	&__input
+		display none
+
+	&__input[type='radio']:checked + &__label:before
 		size(27px, 29px)
 		background-position -57px -7px

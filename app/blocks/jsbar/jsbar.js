@@ -3,4 +3,4 @@ import './gslider.js';
 
 import {jslevel}from '../../data/data.json';
 
-$('#lineCont').gslider(jslevel, 18.9);
+$('#lineCont').gslider(jslevel, 19);
