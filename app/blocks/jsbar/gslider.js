@@ -78,7 +78,7 @@
 
 			// определяем начальное положение бегунка
 			if (!sessionStorage.leftCoord) {
-				$thumbElem.css('left', initValue - 0.45 + '%');
+				$thumbElem.css('left', initValue + '%');
 			}
 			$thumbElem.css('left', leftCoord + 'px');
 		}
