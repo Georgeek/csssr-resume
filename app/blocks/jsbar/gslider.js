@@ -25,21 +25,23 @@
 
 		// объявляем
 		// слайдер, бегунок, выравнивание бегунка по левому и правому краю
-		let $line, $thumbElem, thumbOffsetLeft, thumbOffsetRight;
+		let thumbOffsetLeft, thumbOffsetRight;
 		// положение бегунка будем хранить в sessionStorage
-		let leftCoord = sessionStorage.getItem('leftCoord');
+		let valPercent = sessionStorage.getItem('valPercent');
+		let leftCoord;
 
 		// Создаем в контейнере линию и бегунок для слайдера
 		this.append(`
 			<div class="gslider">
 				<div class="gslider__line">
+					<div class="gslider__line2"></div>
 					<span class="gslider__thumb"></span>
 				</div>
 			</div>
 		`);
 
-		$line = $('.gslider__line');
-		$thumbElem = $('.gslider__thumb');
+		let $line = $('.gslider__line');
+		let $thumbElem = $('.gslider__thumb');
 
 		// Здесь рисуются вехи скроллбара
 		// // Не рисуем скролбар, если длина массива меньше 2. Иначе зачем нам рисовать?
@@ -77,13 +79,16 @@
 			`);
 
 			// определяем начальное положение бегунка
-			if (!sessionStorage.leftCoord) {
+			if (!sessionStorage.valPercent) {
 				$thumbElem.css('left', initValue + '%');
 			}
-			$thumbElem.css('left', leftCoord + 'px');
+			$thumbElem.css('left', valPercent + '%');
 		}
 
 		// отцентровываем бегунок по левому и правому краю
+		// thumbOffsetLeft = $thumbElem.outerWidth() / 4;
+		// thumbOffsetRight = $thumbElem.outerWidth() / 2;
+
 		thumbOffsetLeft = $thumbElem.outerWidth() / 4;
 		thumbOffsetRight = $thumbElem.outerWidth() / 2;
 
@@ -101,12 +106,12 @@
 
 		// любые изменения положения бегунка записываем в sessionStorage
 		function onSetSessionStorage() {
-			sessionStorage.setItem('leftCoord', leftCoord);
+			sessionStorage.setItem('valPercent', valPercent);
 		}
 
 		// присваиваем конечное положение бегунка в переменную, чтобы после перезагрузки страницы бегунок появился на том же месте
 		function onGetSessionStorage() {
-			leftCoord = sessionStorage.getItem('leftCoord');
+			valPercent = sessionStorage.getItem('valPercent');
 		}
 
 		// заканчиваем слушать события мыши
@@ -135,19 +140,22 @@
 			leftCoord = clientX - lineCoords - thumbOffsetRight;
 
 			// центруем бегунок по левому краю слайдера
-			const leftEdge = 0 - thumbOffsetLeft;
-			if (leftCoord < leftEdge) {
+			const leftEdge = 1 - thumbOffsetLeft;
+			if (leftCoord <= leftEdge) {
 				leftCoord = leftEdge;
 			}
 
 			// центруем бегунок по правому краю слайдера
 			const rigthEdge = $line.outerWidth() - thumbOffsetRight;
-			if (leftCoord > rigthEdge) {
+			if (leftCoord >= rigthEdge) {
 				leftCoord = rigthEdge;
 			}
 
+			valPercent = (leftCoord - leftEdge) / (rigthEdge - leftEdge) * 100;
+			console.log(rigthEdge, leftCoord, leftEdge, valPercent.toFixed(2));
+
 			// изменяем положение бегунка
-			$thumbElem.css('left', leftCoord + 'px');
+			$thumbElem.css('left', valPercent.toFixed(2) + '%');
 		}
 
 		// делаем chainable
