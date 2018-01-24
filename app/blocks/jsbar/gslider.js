@@ -33,14 +33,18 @@
 		// Создаем в контейнере линию и бегунок для слайдера
 		this.append(`
 			<div class="gslider">
-				<div class="gslider__line">
-					<div class="gslider__line2"></div>
+				<div class="gslider__input">
 					<span class="gslider__thumb"></span>
+					<input type="hidden" name="slidervalue" value="" />
+				</div>
+				<div class="gslider__container">
+					<div class="gslider__line"></div>
 				</div>
 			</div>
 		`);
 
 		let $line = $('.gslider__line');
+		let $input = $('.gslider__input');
 		let $thumbElem = $('.gslider__thumb');
 
 		// Здесь рисуются вехи скроллбара
@@ -86,9 +90,6 @@
 		}
 
 		// отцентровываем бегунок по левому и правому краю
-		// thumbOffsetLeft = $thumbElem.outerWidth() / 4;
-		// thumbOffsetRight = $thumbElem.outerWidth() / 2;
-
 		thumbOffsetLeft = $thumbElem.outerWidth() / 4;
 		thumbOffsetRight = $thumbElem.outerWidth() / 2;
 
@@ -136,7 +137,7 @@
 
 		// здесь вычисляется координата бегунка относительно линии слайдера
 		function dragThumb(clientX) {
-			const lineCoords = $line.position().left;
+			const lineCoords = $input.position().left;
 			leftCoord = clientX - lineCoords - thumbOffsetRight;
 
 			// центруем бегунок по левому краю слайдера
@@ -146,16 +147,17 @@
 			}
 
 			// центруем бегунок по правому краю слайдера
-			const rigthEdge = $line.outerWidth() - thumbOffsetRight;
+			const rigthEdge = $input.outerWidth() - thumbOffsetRight;
 			if (leftCoord >= rigthEdge) {
 				leftCoord = rigthEdge;
 			}
 
-			valPercent = (leftCoord - leftEdge) / (rigthEdge - leftEdge) * 100;
-			console.log(rigthEdge, leftCoord, leftEdge, valPercent.toFixed(2));
+			valPercent = ((leftCoord - leftEdge) / (rigthEdge - leftEdge) * 100).toFixed(2);
+			console.log(rigthEdge, leftCoord, leftEdge, valPercent);
 
 			// изменяем положение бегунка
-			$thumbElem.css('left', valPercent.toFixed(2) + '%');
+			$thumbElem.css('left', valPercent + '%');
+			$('input[name=slidervalue]').val(valPercent);
 		}
 
 		// делаем chainable
