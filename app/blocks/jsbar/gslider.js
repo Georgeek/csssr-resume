@@ -153,7 +153,9 @@
 			}
 
 			valPercent = ((leftCoord - leftEdge) / (rigthEdge - leftEdge) * 100).toFixed(2);
-			console.log(rigthEdge, leftCoord, leftEdge, valPercent);
+
+			// раскомментировать для проверки значений бегунка
+			// console.log(rigthEdge, leftCoord, leftEdge, valPercent);
 
 			// изменяем положение бегунка
 			$thumbElem.css('left', valPercent + '%');
